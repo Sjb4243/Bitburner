@@ -1,3 +1,10 @@
+/** @param {NS} ns */
+/**
+ * [Finds the optimal taget to focus our hacking on]
+ * @return {[string]}      [Server name of target]
+ */
+
+
 import {crawl} from "/helpers/crawl.js";
 
 export async function findBestTarget(ns) {
