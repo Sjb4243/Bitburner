@@ -7,10 +7,15 @@
 
 export async function main(ns, servers, percentages) {
     let totalRam = 0;
+    if (servers[0] == "home"){
+        servers = servers.shift()
+    }
+
+
+
     for (let i = 0; i < servers.length;i++){
-        if (!servers[i] != "home"){
-            totalRam = totalRam +  ns.getServerMaxRam()
-        }
+         totalRam = totalRam +  ns.getServerMaxRam()
+        
     }
 
     let totalThreads = Math.floor(totalRam / 1.75) 
@@ -21,7 +26,6 @@ export async function main(ns, servers, percentages) {
     let slicedArray = servers
     while (growThreads > 0){
         for (let i = 0; i < servers.length;i++){
-            if (servers[i] != "home"){
             server = servers[i]
             let usedThreads = Math.floor(ns.getServerMaxRam(server) - ns.getServerUsedRam(server) / 1.75)
             if (growThreads - usedThreads < 0){
@@ -33,7 +37,6 @@ export async function main(ns, servers, percentages) {
             }
             //CALL SCRIPT HERE WITH USED THREADS
             growThreads = growThreads - usedThreads
-            }
         }
     }
     //WEAKTHREADS
