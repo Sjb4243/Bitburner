@@ -1,1 +1,1 @@
-shaska bad
+shaska good
