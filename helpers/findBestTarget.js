@@ -22,7 +22,6 @@ async function BestTarget(ns, serverList){
         var serverSecurity = ns.getServerRequiredHackingLevel(serverList[server]);
         if (hackingLevel >= serverSecurity){
             potentialTargets.push(serverList[server])
-            //ns.print(potentialTargets);
         }
     }
 
@@ -30,7 +29,6 @@ async function BestTarget(ns, serverList){
     for (var target in potentialTargets){
         if (ns.getServerMaxMoney(potentialTargets[target]) > ns.getServerMaxMoney(bestTarget)){
             bestTarget = potentialTargets[target]
-            ns.print("hello");
         }
     }
     return bestTarget;
