@@ -5,10 +5,10 @@
  */
 
 
-import {crawl} from "/helpers/crawl.js";
+//import {crawl} from "/helpers/crawl.js";
 
-export async function findBestTarget(ns) {
-	let serverList = await crawl(ns);
+export async function findBestTarget(ns, serverList) {
+	//let serverList = await crawl(ns);
     let target = "null";
     target = await BestTarget(ns, serverList);
     return target;
