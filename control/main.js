@@ -2,7 +2,7 @@
 
 import {crawl} from "/helpers/crawl.js";
 import {crack} from "/helpers/crack.js";
-import {findBestTarget} from "/helpers/findBestTarget";
+//import {findBestTarget} from "/helpers/findBestTarget";
 
 export async function main(ns) {
     let serverList = await crawl(ns);
@@ -22,7 +22,11 @@ export async function main(ns) {
     }
 
     //Find the best server to focus our hacking on
-    let target = await findBestTarget(ns, crackedServerList);
+    //let target = await findBestTarget(ns, crackedServerList);
+
+    //This should make the entirety of findBestTarget.js obsolete
+    let target = crackedServerList.reduce((a, b) => ns.getServerMaxMoney(a) > ns.getServerMaxMoney(b) ? a : b)
+
 
     //Distribute scripts to cracked servers
     for (server in crackedServerList){
