@@ -11,9 +11,13 @@ export async function distribute(ns, servers, percentages, target) {
 
   for (let i = 0; i < servers.length; i++) {
     totalRam = totalRam + ns.getServerMaxRam(servers[i])
-
   }
-  let totalThreads = Math.floor(totalRam / 1.75);
+
+  let totalThreads = 0;
+  for (var server in servers){
+    totalThreads += Math.floor(ns.getServerMaxRam(servers[server]) / 1.75);
+  }
+  //let totalThreads = Math.floor(totalRam / 1.75);
   let growThreads = Math.floor(totalThreads * percentages[0]);
   let weakThreads = Math.floor(totalThreads * percentages[1]);
   let hackThreads = Math.floor(totalThreads * percentages[2]);
