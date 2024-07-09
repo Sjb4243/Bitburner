@@ -14,7 +14,7 @@ export async function main(ns, servers, percentages) {
 
 
     for (let i = 0; i < servers.length;i++){
-         totalRam = totalRam +  ns.getServerMaxRam()
+         totalRam = totalRam +  ns.getServerMaxRam(servers[i)
         
     }
 
