@@ -1,8 +1,8 @@
 export async function getValid(ns, serverArray) {
     let validArray = []
-    for (let i = 0;i < serverArray.length;i++){
-        let server = serverArray[i]
-        if(ns.hasRootAccess(server) && ns.getServerMaxRam(server) > 2 && ns.getServerRequiredHackingLevel(server) < ns.getHackingLevel()){
+    const hackingLevel = ns.getHackingLevel(); // Get hacking level once
+    for (let server of serverArray) { // Iterate using for...of loop
+        if (ns.hasRootAccess(server) && ns.getServerMaxRam(server) > 2 && ns.getServerRequiredHackingLevel(server) < hackingLevel) {
             validArray.push(server)
         }
     }

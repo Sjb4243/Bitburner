@@ -19,8 +19,8 @@ export async function main(ns) {
     }
 
     //Figure out which servers we have available to us currently
-    serverList = await getValid(serverList)
-    let target = hackableServerList.reduce((a, b) => ns.getServerMaxMoney(a) > ns.getServerMaxMoney(b) ? a : b)
+    serverList = await getValid(ns,serverList)
+    let target = serverList.reduce((a, b) => ns.getServerMaxMoney(a) > ns.getServerMaxMoney(b) ? a : b)
     
 
     //Distribute scripts to cracked servers
