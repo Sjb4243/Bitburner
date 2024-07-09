@@ -46,6 +46,6 @@ export async function main(ns) {
     //Distribute instructions to all the servers (loop)
     while (true){
         await distribute(ns, serverList, [0.5,0.08,0.42]/*Arbitrary numbers for now, calculate properly later*/, target);
-        ns.sleep(5000);
+        await ns.sleep(5000);
     }
 }
