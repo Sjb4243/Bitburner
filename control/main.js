@@ -8,6 +8,7 @@ export async function main(ns) {
     let serverList = await crawl(ns);
     let crackedServerList = []
     let hackingScripts = ["/helpers/grow.js", "/helpers/hack.js", "/helpers/weaken.js"]
+    let hackingScriptsLoc = ["grow.js", "hack.js", "weaken.js"]
     let threadsAvailable = 0;
 
     //crack all the servers we can
@@ -31,6 +32,9 @@ export async function main(ns) {
     //Distribute scripts to cracked servers
     for (server in crackedServerList){
         ns.scp(hackingScripts, crackedServerList[server]);
+        for (file in hackingScripts){
+            ns.mv(crackedServerList[server], hackingScripts[file], hackingScriptsLoc[file]);
+        }
     }
 
     //Calculate available ram/threads
