@@ -7,6 +7,7 @@
 export async function crawl(ns) {
   let visited = [];
   await recurse(ns, "home", visited);
+  visited.shift(); //Begone home
   return visited;
 }
 

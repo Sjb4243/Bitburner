@@ -8,7 +8,7 @@
 
 export async function distribute(ns, servers, percentages, target) {
   let totalRam = 0;
-  servers.shift();
+
   for (let i = 0; i < servers.length; i++) {
     totalRam = totalRam + ns.getServerMaxRam(servers[i])
 
@@ -21,6 +21,7 @@ export async function distribute(ns, servers, percentages, target) {
   servers = await start_distribute(ns, weakThreads, servers, "weaken.js", target)
   servers = await start_distribute(ns, hackThreads, servers, "hack.js", target)
 }
+
 export async function start_distribute(ns, threads, serverlist, script, target){
   let counter = 0
   const copyList = serverlist.slice();
