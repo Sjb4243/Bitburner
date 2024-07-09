@@ -8,13 +8,13 @@
 export async function main(ns, servers, percentages) {
     let totalRam = 0;
     if (servers[0] == "home"){
-        servers = servers.shift()
+        servers.shift()
     }
 
 
 
     for (let i = 0; i < servers.length;i++){
-         totalRam = totalRam +  ns.getServerMaxRam(servers[i)
+         totalRam = totalRam +  ns.getServerMaxRam(servers[i])
         
     }
 
