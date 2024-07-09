@@ -16,7 +16,7 @@ export async function crack(ns, server) {
         }
     }
 
-    if (portsNeeded <= open) {
+    if (portsNeeded <= open && !ns.hasRootAccess(server)) {
         ns.nuke(server);
         ns.tprint("New host: " + server);
     }
