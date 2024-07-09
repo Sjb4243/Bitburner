@@ -34,7 +34,7 @@ export async function main(ns) {
         }
     }
     let target = hackableServerList.reduce((a, b) => ns.getServerMaxMoney(a) > ns.getServerMaxMoney(b) ? a : b)
-
+    
 
     //Distribute scripts to cracked servers
     for (server in crackedServerList){
@@ -55,7 +55,7 @@ export async function main(ns) {
     }
     //Grow available cash to desired level before we begin hacking
     while ((ns.getServerMaxMoney(target)*0.8) > ns.getServerMoneyAvailable(target))
-        await distribute(ns, crackedServerList, [1,0,0], target);
+        await distribute(ns, crackedServerList, [0.9,0.1,0], target);
     
     //Calculate hack/grow/weaken ratios
     //need 1 weaken thread per 12.5 grow threads (8%)
@@ -63,6 +63,6 @@ export async function main(ns) {
 
     //Distribute instructions to all the servers (loop)
     while (true){
-        await distribute(ns, crackedServerList, [0.42,0.08,0.5]/*Arbitrary numbers for now, calculate properly later*/, target);
+        await distribute(ns, crackedServerList, [0.5,0.08,0.42]/*Arbitrary numbers for now, calculate properly later*/, target);
     }
 }
