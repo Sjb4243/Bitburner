@@ -46,11 +46,10 @@ export async function main(ns, servers, percentages) {
         }
         //Call script using usedthreads and then take it off of growthreads
         //CALL SCRIPT HERE WITH USED THREADS
-        await ns.exec("http://grow.js", server, usedThreads, "n00dles")
+        await ns.exec(grow.js", server, usedThreads, "n00dles")
         ++counter;
         growThreads = growThreads - usedThreads;
         }
-    }
     //WEAKTHREADS
     //HACKTHREADS
     //BASICALLY THE SAME SO SHOUDL FUNCTIONISE IT
