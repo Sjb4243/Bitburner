@@ -18,7 +18,7 @@ export async function main(ns) {
 
     //Figure out which servers we have available to us currently
     for (var server in serverList){
-        if (ns.hasRootAccess(serverList[server])){
+        if (ns.hasRootAccess(serverList[server]) && ns.getServerMaxRam(serverList[server] >= 2)){
             crackedServerList.push(serverList[server]);
         }
     }
