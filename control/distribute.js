@@ -27,7 +27,7 @@ export async function main(ns, servers, percentages) {
     //While we still have threads left to allocate
     while (growThreads > 0){
         for (let i = 0; i < slicedArray.length;i++){
-            server = slicedArray[i]
+            let server = slicedArray[i]
             //get the amount of usable threads vs our ram cost
             let usedThreads = Math.floor(ns.getServerMaxRam(server) - ns.getServerUsedRam(server) / 1.75)
             //if the max threads use too much, get the amount we're over by and take it off of it
