@@ -25,13 +25,13 @@ export async function distribute(ns, origServ, percentages, target) {
   for (let i = 0;i < servers.length;i++){
     let server = servers[i]
     if (ns.isRunning("grow.js", server, target)){
-      growRunning = growRunning + ns.getRunningSCript("grow.js", server, target).threads
+      growRunning = growRunning + ns.getRunningScript("grow.js", server, target).threads
     }
     if (ns.isRunning("weaken.js", server, target)){
-      weakRunning = weakRunning + ns.getRunningSCript("weaken.js", server, target).threads
+      weakRunning = weakRunning + ns.getRunningScript("weaken.js", server, target).threads
     }
     if (ns.isRunning("hack.js", server, target)){
-      hackRunning = hackRunning + ns.getRunningSCript("hack.js", server, target).threads
+      hackRunning = hackRunning + ns.getRunningScript("hack.js", server, target).threads
     }
   }
   growThreads - growRunning
