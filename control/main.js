@@ -32,24 +32,16 @@ export async function main(ns) {
   }
   //Weaken server security before we begin hacking
   while (ns.getServerSecurityLevel(target) > ns.getServerMinSecurityLevel(target)) {
-    if (!ns.isRunning("weaken.js", "n00dles", target)) {
-      await ns.sleep(5000)
-      await distribute(ns, serverList, [0, 1, 0], target);
-    } else {
-      ns.tprint("Weakening")
-      await ns.sleep(5000)
-    }
+    ns.tprint("Weakening")
+    await distribute(ns, serverList, [0, 1, 0], target);
+    await ns.sleep(ns.getWeakenTime(target) + 5000)
   }
   //Grow available cash to desired level before we begin hacking
-  while ((ns.getServerMaxMoney(target) * 0.8) > ns.getServerMoneyAvailable(target))
-    if (!ns.isRunning("grow.js", "n00dles", target)) {
-      ns.tprint(!ns.isRunning("grow.js", "n00dles", target))
-      await distribute(ns, serverList, [0.9, 0.1, 0], target);
-      await ns.sleep(5000)
-    } else {
-      ns.tprint(!ns.isRunning("grow.js", "n00dles", target))
-      await ns.sleep(5000)
-    }
+  while ((ns.getServerMaxMoney(target) * 0.8) > ns.getServerMoneyAvailable(target)) {
+    ns.tprint("Growing")
+    await distribute(ns, serverList, [0.9, 0.1, 0], target);
+    await ns.sleep(ns.getGrowTime(target) + 5000)
+  }
 
   //Calculate hack/grow/weaken ratios
   //need 1 weaken thread per 12.5 grow threads (8%)
@@ -58,14 +50,9 @@ export async function main(ns) {
   //Distribute instructions to all the servers (loop)
   while (true) {
     // Check if grow.js is running on n00dles with the specified target
-    if (!ns.isRunning("grow.js", "n00dles", target)) {
-      await distribute(ns, serverList, [0.5, 0.08, 0.42]/*Arbitrary numbers for now, calculate properly later*/, target);
-      ns.tprint("Should have called distribute");
-      // Wait for a short period before checking again to avoid spamming
-      await ns.sleep(5000);
-    } else {
-      // If grow.js is running, wait for a shorter period before checking again
-      await ns.sleep(5000);
-    }
+    await distribute(ns, serverList, [0.5, 0.08, 0.42]/*Arbitrary numbers for now, calculate properly later*/, target);
+    await ns.sleep(ns.getHackTime(target) + 5000)
+    ns.tprint("Should have called distribute");
+    // Wait for a short period before checking again to avoid spamming
   }
 }
