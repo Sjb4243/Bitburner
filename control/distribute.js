@@ -6,9 +6,9 @@
  * @param {[string]} arg3 [string array]
  */
 
-export async function distribute(ns, servers, percentages, target) {
+export async function distribute(ns, origServ, percentages, target) {
   let totalRam = 0;
-
+  let servers = origServ.slice() // Makes sure we're not working on a pointer - otherwise distribute runs with nothing
 
   let totalThreads = 0;
   for (var server in servers) {
