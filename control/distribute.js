@@ -34,9 +34,9 @@ export async function distribute(ns, origServ, percentages, target) {
       hackRunning = hackRunning + ns.getRunningScript("hack.js", server, target).threads
     }
   }
-  growThreads - growRunning
-  weakThreads - weakRunning
-  hackThreads - hackRunning
+  growThreads = growThreads - growRunning
+  weakThreads = weakThreads - weakRunning
+  hackThreads = hackThreads - hackRunning
 
   servers = await start_distribute(ns, growThreads, servers, "grow.js", target)
   servers = await start_distribute(ns, weakThreads, servers, "weaken.js", target)
