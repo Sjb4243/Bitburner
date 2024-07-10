@@ -4,10 +4,14 @@
  * @return {[array]}      [array of all servers in the network (not player owned)]
  */
 
-export async function crawl(ns) {
+export async function crawl(ns, removeHome = true) {
   let visited = [];
   await recurse(ns, "home", visited);
-  visited.shift(); //Begone home
+
+  if (removeHome){
+    visited.shift(); //Begone home
+  }
+  
   return visited;
 }
 
