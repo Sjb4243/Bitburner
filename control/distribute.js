@@ -18,6 +18,26 @@ export async function distribute(ns, origServ, percentages, target) {
   let growThreads = Math.floor(totalThreads * percentages[0]);
   let weakThreads = Math.floor(totalThreads * percentages[1]);
   let hackThreads = Math.floor(totalThreads * percentages[2]);
+
+  let growRunning = 0
+  let weakRunning = 0
+  let hackRunning = 0
+  for (let i = 0;i < servers.length;i++){
+    let server = servers[i]
+    if (ns.isRunning("grow.js", server, target)){
+      growRunning = growRunning + ns.getRunningSCript("grow.js", server, target).threads
+    }
+    if (ns.isRunning("weaken.js", server, target)){
+      weakRunning = weakRunning + ns.getRunningSCript("weaken.js", server, target).threads
+    }
+    if (ns.isRunning("hack.js", server, target)){
+      hackRunning = hackRunning + ns.getRunningSCript("hack.js", server, target).threads
+    }
+  }
+  growThreads - growRunning
+  weakThreads - weakRunning
+  hackThreads - hackRunning
+
   servers = await start_distribute(ns, growThreads, servers, "grow.js", target)
   servers = await start_distribute(ns, weakThreads, servers, "weaken.js", target)
   servers = await start_distribute(ns, hackThreads, servers, "hack.js", target)
@@ -29,6 +49,10 @@ export async function start_distribute(ns, threads, serverlist, script, target) 
   while (threads > 0 && counter < copyList.length) {
     let server = copyList[counter];
     let usedThreads = Math.floor((ns.getServerMaxRam(server) - ns.getServerUsedRam(server)) / 1.75);
+    if (usedThreads == 0){
+      ++counter;
+      continue
+    }
     if (threads - usedThreads < 0) {
       //if the max threads use too much, get the amount we're over by and take it off of it
       //That way we can half use servers
