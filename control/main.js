@@ -34,13 +34,13 @@ export async function main(ns) {
   while (ns.getServerSecurityLevel(target) > ns.getServerMinSecurityLevel(target)) {
       ns.tprint("Weakening")
       await distribute(ns, serverList, [0, 1, 0], target);
-      await ns.sleep(ns.getWeakenTime(target) + 5000)
+      await ns.sleep(20000)
   }
   //Grow available cash to desired level before we begin hacking
   while ((ns.getServerMaxMoney(target) * 0.8) > ns.getServerMoneyAvailable(target)){
       ns.tprint("Growing")
       await distribute(ns, serverList, [0.9, 0.1, 0], target);
-      await ns.sleep(ns.getGrowTime(target) + 5000)
+      await ns.sleep(20000)
   }
 
   //Calculate hack/grow/weaken ratios
@@ -52,7 +52,7 @@ export async function main(ns) {
     // Check if grow.js is running on n00dles with the specified target
       ns.tprint("Should have called distribute");
       await distribute(ns, serverList, [0.5, 0.08, 0.42]/*Arbitrary numbers for now, calculate properly later*/, target);
-      await ns.sleep(ns.getHackTime(target) + 5000)
+      await ns.sleep(20000)
 
       // Wait for a short period before checking again to avoid spamming
   }
