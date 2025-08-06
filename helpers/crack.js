@@ -1,7 +1,7 @@
 /** @param {NS} ns */
 /**
  * [Cracks a server]
- * @param  {[string]} arg1 [server to be cracked]
+ * @param  {[string]} server [server to be cracked]
  */
 export async function crack(ns, server) {
     const portCrackers = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"];
@@ -20,4 +20,16 @@ export async function crack(ns, server) {
         ns.nuke(server);
         ns.tprint("New host: " + server);
     }
+}
+
+
+/** @param {NS} ns */
+/**
+ * [Cracks a server]
+ * @param  {[Array]} serverList [List of servers to be cracked]
+ */
+export async function CrackServerList(ns, serverList){
+  for (let server in serverList) {
+    crack(ns, serverList[server])
+  }
 }

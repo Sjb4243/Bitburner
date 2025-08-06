@@ -9,7 +9,7 @@ export async function crawl(ns, removeHome = true) {
   await recurse(ns, "home", visited);
 
   if (removeHome){
-    visited.shift(); //Begone home
+    visited.shift();
   }
 
   let serverList = [];
